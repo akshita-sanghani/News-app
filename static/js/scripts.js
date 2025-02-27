@@ -18,7 +18,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 mainNav.classList.remove('is-visible', 'is-fixed');
             }
         } else {
-            // Scrolling Down
+            // Scrolling Down 
             mainNav.classList.remove(['is-visible']);
             if (currentTop > headerHeight && !mainNav.classList.contains('is-fixed')) {
                 mainNav.classList.add('is-fixed');
