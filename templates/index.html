@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% comment %} <marquee onmouseover='stop'>
+    {% for n in newsData %}
+    <a href="post.html"> {{n.news_title}} </a> &nbsp;&nbsp;&nbsp;
+    {% endfor %}
+</marquee> {% endcomment %}
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('/static/assets/img/home-bg.jpg')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="site-heading">
+                            <h1>Clean Blog</h1>
+                            <span class="subheading">A Blog Theme by Start Bootstrap</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Main Content-->
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <div col='12'>
+                        <form method='get'>
+                            <input type='text ' name='newsname' value=''/>
+                            <input type='submit' value='Search'/>
+                        </form>
+                    <div>
+                    <!-- Post preview-->
+                    {% for n in newsData %}
+                    <div class="post-preview">
+                        <a href="/newsDetails/{{n.news_slug}}">
+                            <h2 class="post-title">{{n.news_title}}</h2>
+                        </a>
+                        <p class="post-meta">
+                            {{n.news_desc | safe | slice:":250" }}
+                        </p>
+                    </div>
+
+                    <hr class="my-4" />
+                    {% empty %}
+                    No Data Found
+                    {% endfor %}
+                    
+                    <!-- Divider-->
+                    <!-- Post preview-->
+                    {% comment %} <div class="post-preview">
+                        <a href="post.html">
+                            <h2 class="post-title">I believe every human has a finite number of heartbeats.</h2>
+                            <h3 class="post-subtitle"> I don't intend to waste any of mine.</h3></a>
+                        <p class="post-meta">
+                            Posted by
+                            <a href="#!">Start Bootstrap</a>
+                            on September 18, 2023
+                        </p>
+                    </div>
+                    <!-- Divider-->
+                    <hr class="my-4" />
+                    <!-- Post preview-->
+                    <div class="post-preview">
+                        <a href="post.html">
+                            <h2 class="post-title">Science has not yet mastered prophecy</h2>
+                            <h3 class="post-subtitle">We predict too much for the next year and yet far too little for the next ten.</h3>
+                        </a>
+                        <p class="post-meta">
+                            Posted by
+                            <a href="#!">Start Bootstrap</a>
+                            on August 24, 2023
+                        </p>
+                    </div>
+                    <!-- Divider-->
+                    <hr class="my-4" />
+                    <!-- Post preview-->
+                    <div class="post-preview">
+                        <a href="post.html">
+                            <h2 class="post-title">Failure is not an option</h2>
+                            <h3 class="post-subtitle">Many say exploration is part of our destiny, but it’s actually our duty to future generations.</h3>
+                        </a>
+                        <p class="post-meta">
+                            Posted by
+                            <a href="#!">Start Bootstrap</a>
+                            on July 8, 2023
+                        </p>
+                    </div> 
+                    <!-- Divider-->
+                    <hr class="my-4" /> {% endcomment %}
+                    <!-- Pager-->
+                    <nav aria-label="...">
+                        <ul class="pagination">
+                            {% if newsData.has_previous %}
+                          <li class="page-item">
+                            <a class="page-link" href="/?page=1" tabindex="1">First</a>
+                          </li>
+                          <li class="page-item">
+                            <a class="page-link" href="/?page={{newsData.previous_page_number}}" tabindex="1">Previous</a>
+                          </li>
+                          {% endif %}
+                          
+                          {% for n in totalpagelist %}
+                          <li class="page-item"><a class="page-link" href="/?page={{n}}">{{n}}</a></li>
+                          {% endfor %}
+
+                          {% if newsData.has_next %}
+                          <li class="page-item">
+                            <a class="page-link" href="/?page={{newsData.next_page_number}}">Next</a>
+                          </li>
+                          <li class="page-item">
+                            <a class="page-link" href="/?page={{lastpage}}">Last</a>
+                          </li>
+                          {% endif %}
+                        </ul>
+                      </nav>
+                </div>
+            </div>
+        </div>
+    
+{% endblock %}
